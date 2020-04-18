@@ -8,7 +8,7 @@ import { AuthService } from '../_services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
-  //@Input() valuesFromHome: any;
+  // @Input() valuesFromHome: any;
   @Output() cancelRegister = new EventEmitter();
 
   model: any = {};
@@ -16,13 +16,12 @@ export class RegisterComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-  
 
   }
 
 
   register(){
-    console.log('registeration starts')
+   // console.log('registeration starts');
     this.authService.register(this.model).subscribe(() => {
     console.log('register Successful');
     }, error => {
