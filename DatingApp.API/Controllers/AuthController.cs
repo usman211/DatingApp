@@ -9,6 +9,7 @@ using System.Text;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Http;
 
 namespace DatingApp.API.Controllers
 {
@@ -50,14 +51,18 @@ namespace DatingApp.API.Controllers
             return StatusCode(201);
 
         }
+        
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
+          
+            // throw new Exception("Computer Says NO...");
+           
             var userFromRepo = await _repo.Login(userForLoginDto.UserName.ToLower(), userForLoginDto.Password);
 
             if (userFromRepo == null)
-                return Unauthorized();
+                return Unauthorized(); 
 
 
             var claims = new[]
@@ -84,6 +89,8 @@ namespace DatingApp.API.Controllers
             return Ok(new {
                 token = tokenHandler.WriteToken(token)
             });
+
+           
 
         }
     }
